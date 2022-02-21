@@ -91,25 +91,3 @@ womenButton.addEventListener("click", () => {
 });
 //olderWomen[0].birthday.dmy
 
-
-/*
-const womenName = olderWomen.map((women) => women.name);
-const sortedWomen = womenName.sort();
-
-console.log(sortedWomen);
-sortedWomen.forEach((women) => {
-  const newLi = document.createElement("li");
-  const newImage = document.createElement("img");
-
-  newImage.src = women.photo;
-  const firstName = womenName;
-
-  
-  newLi.innerHTML = `${firstName}`;
-  newLi.appendChild(newImage);
-
-  return newLi;
-});
-sortedWomen.forEach((li) => {
-  unorderedList.append(li);
-  */
