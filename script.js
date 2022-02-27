@@ -12,71 +12,69 @@ const showCountries = (data) => {
     const countryName = country;
 
     newLi.innerHTML = countryName;
-    //console.log(typeof newLi)
-    return newLi;
-  });
-  /*
-  for (i = 0; i < countries.length; i++) {
-    console.log(typeof countries)
-    unorderedList.appendChild(countries[i])
-  }
-  */
 
-  countries.forEach((li) => {
-    unorderedList.appendChild(li);
+    unorderedList.appendChild(newLi);
+    return newLi;
   });
 };
 
 const showCapricornWomen = (data) => {
+  const capricorn = data.map((person) => {
+    const birthdayDate = new Date(person.birthday.mdy);
+    const month = birthdayDate.getMonth() + 1; // Get the month
+    //  console.log(month)
+    const day = birthdayDate.getDate(); // Get the day
+    //  console.log(day)
+    if ((month === 11 && day >= 22) || (month === 1 && day <= 18)) {
+      return "capricorn";
+    } else {
+      return null;
+    }
+  });
+  console.log(capricorn);
+
+  const allWomen = data.filter((person) => {
+    return person.gender === "female" && person.age > 30; // && capricorn  === 'capricorn'
+  });
+
+
+  console.log(allWomen);
+
+ const womenName = allWomen.map((person) => person.name);
+// console.log(womenName);
+const womenLastName = allWomen.map((person) => person.surname);
+//console.log(womenLastName)
+
+const sortedWomen = womenName.sort()
+//console.log(sortedWomen)
+
   
-  const allWomen = data.filter((person) => person.gender === "female");
-  // console.log("Only the women:", women);
-
-  const olderWomen = allWomen.filter((person) => person.age > 30);
-  // console.log("Only the women older than 30:", olderWomen);
-const birthdayDates = olderWomen.map((women) => women.birthday.dmy)
-
-const birthday = birthdayDates.map((day) => {
-  const birthdayDate = new Date(day);
-  
-  console.log(birthdayDate)
-})
-
-
-
- console.log(olderWomen)
-
-  const womenName = olderWomen.map((women) => women.name);
-  const sortedWomen = womenName.sort();
-  
-  console.log(sortedWomen);
-  olderWomen.map((women) => {
+  allWomen.forEach((women) => {
     const newLi = document.createElement("li");
     const newImage = document.createElement("img");
 
-    const womenName = olderWomen.map((women) => women.name)
-    const womenLastName = olderWomen.map((women) => women.surname)
- //console.log(womenName)
-    const sortedWomenName = womenName.sort
+    
+    const womenName = allWomen.map((women) => women.name);
+const womenLastName = allWomen.map((women) => women.surname);
+   // console.log(womenName)
+    const sortedWomenName = womenName.sort();
     newImage.src = women.photo;
- //   console.log(women.photo)
-  
-    newLi.innerHTML = `${sortedWomenName} ${womenLastName} `;
-   
+    
+
+    newLi.innerHTML = sortedWomenName;
+
     newLi.appendChild(newImage);
+    unorderedList.appendChild(newLi);
 
     return newLi;
   });
-  sortedWomen.forEach(li => {
-    unorderedList.appendChild(li);
-  });
-  //console.log(capricornOlderWomen)
 };
-//showCapricornWomen(randomPersonData);
-
 
 const resetAll = () => {
-  unorderedList.innerHTML = "";
+  // unorderedList.innerHTML = "";
+  while (unorderedList.firstChild) {
+    unorderedList.removeChild(unorderedList.firstChild);
+  }
 };
 
 countryButton.addEventListener("click", () => {
@@ -84,10 +82,8 @@ countryButton.addEventListener("click", () => {
   showCountries(randomPersonData);
 });
 
-
 womenButton.addEventListener("click", () => {
   resetAll();
   showCapricornWomen(randomPersonData);
 });
 //olderWomen[0].birthday.dmy
-
